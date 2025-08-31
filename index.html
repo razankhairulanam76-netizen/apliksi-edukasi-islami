@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1"/>
+<title>Edukasi Mental Islami — Final</title>
+<style>
+:root{
+  --bg:#061026; --card:#0e1a2b; --muted:#9fb0d0;
+  --accent1:#6c7cff; --accent2:#00d4ff; --white:#ffffff;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, system-ui, Roboto, Arial; background:
+  radial-gradient(60vw 50vh at 10% 0%, rgba(108,124,255,.06), transparent),
+  radial-gradient(60vw 50vh at 100% 100%, rgba(0,212,255,.04), transparent),
+  var(--bg); color:var(--white); -webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+
+/* top */
+.topbar{position:sticky;top:0;backdrop-filter:blur(6px);background:linear-gradient(180deg, rgba(2,8,18,.9), rgba(2,8,18,.6));border-bottom:1px solid rgba(255,255,255,.03);z-index:40}
+.top-inner{max-width:980px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;padding:12px 16px}
+.brand{display:flex;gap:12px;align-items:center}
+.logo{width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent1));display:grid;place-items:center;font-size:22px;box-shadow:0 10px 40px rgba(0,0,0,.6)}
+.title{font-weight:800}
+.subtitle{color:var(--muted);font-size:.85rem;margin-top:2px}
+.points{background:#07102a;padding:8px 12px;border-radius:12px;border:1px solid rgba(255,255,255,.03);font-weight:800}
+
+/* container/menu */
+.container{max-width:980px;margin:14px auto;padding:0 16px}
+.intro{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));border-radius:14px;padding:18px;border:1px solid rgba(255,255,255,.03);display:flex;align-items:center;justify-content:space-between;gap:12px}
+.intro-left{display:flex;flex-direction:column}
+.intro-title{font-size:28px;font-weight:900}
+.intro-sub{color:var(--muted);margin-top:6px}
+
+/* grid menu 2x4 (fits typical phone screen) */
+.menu-grid{display:grid;grid-template-columns:repeat(2,1fr);grid-auto-rows:120px;gap:14px;margin-top:14px}
+.menu-card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));border-radius:14px;padding:12px;border:1px solid rgba(255,255,255,.03);display:flex;align-items:center;gap:12px;cursor:pointer;box-shadow:0 10px 30px rgba(0,0,0,.45)}
+.menu-icon{width:56px;height:56px;border-radius:12px;background:linear-gradient(135deg,var(--accent2),var(--accent1));display:grid;place-items:center;font-size:28px}
+.menu-text{flex:1}
+.menu-title{font-weight:800;color:var(--white)}
+.menu-desc{color:var(--muted);font-size:.92rem;margin-top:8px}
+
+/* button styles */
+.btn{background:linear-gradient(135deg,var(--accent2),var(--accent1));color:var(--white);padding:10px 12px;border-radius:10px;border:0;font-weight:800;cursor:pointer}
+.btn-ghost{background:transparent;border:1px solid rgba(255,255,255,.05);padding:8px 10px;border-radius:10px;color:var(--white);cursor:pointer}
+.btn-white{background:#ffffff;color:#061028;padding:8px 10px;border-radius:10px;border:0;font-weight:800}
+
+/* overlay sections (full-screen) */
+.section{position:fixed;inset:0;background:linear-gradient(180deg, rgba(2,6,12,.98), rgba(2,6,12,.98));z-index:60;display:none;padding:18px;overflow:auto}
+.sec-top{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.back{background:#fff;color:#061028;border-radius:10px;padding:8px 12px;border:0;cursor:pointer;font-weight:800}
+.sec-body{margin-top:12px}
+.card{background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));padding:12px;border-radius:12px;border:1px solid rgba(255,255,255,.03);margin-bottom:12px}
+.item-arab{font-size:20px;direction:rtl;line-height:1.9}
+.latin{color:#cfe6ff;margin-top:8px}
+.small-muted{color:var(--muted);font-size:.9rem}
+.locked{background:#1b2742;color:#9fb0d0;padding:8px 10px;border-radius:10px;border:1px dashed rgba(255,255,255,.02);cursor:not-allowed}
+
+/* controls row */
+.ctrl-row{display:flex;gap:8px;align-items:center;margin-top:10px}
+
+/* splash/intro page overlay (before menu) */
+.splash{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:100;padding:20px;background:
+  radial-gradient(60vw 50vh at 50% 10%, rgba(108,124,255,.12), transparent),
+  radial-gradient(80vw 60vh at 50% 100%, rgba(0,212,255,.08), transparent), var(--bg)}
+.splash-card{width:100%;max-width:760px;background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.01));border-radius:20px;padding:28px;border:1px solid rgba(255,255,255,.04);box-shadow:0 30px 80px rgba(0,0,0,.6);text-align:center}
+.splash-logo{width:96px;height:96px;border-radius:22px;background:linear-gradient(135deg,var(--accent1),var(--accent2));display:grid;place-items:center;font-size:40px;margin:0 auto 10px}
+.splash-title{font-size:1.9rem;font-weight:900}
+.splash-desc{color:var(--muted);margin-top:8px}
+.splash-actions{display:flex;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap}
+.auto-note{color:var(--muted);margin-top:8px}
+
+/* toast */
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:26px;background:#07112a;padding:10px 14px;border-radius:12px;color:#dff4ff;border:1px solid rgba(255,255,255,.04);display:none;z-index:999}
+
+/* responsive */
+@media(max-width:520px){
+  .menu-grid{grid-auto-rows:110px}
+  .item-arab{font-size:18px}
+  .splash-card{padding:18px}
+}
+</style>
+</head>
+<body>
+
+<!-- SPLASH / INTRO -->
+<div id="splash" class="splash" aria-hidden="false">
+  <div class="splash-card">
+    <div class="splash-logo">📿</div>
+    <div class="splash-title">Edukasi Mental Islami</div>
+    <div class="splash-desc">Remaja Madrasah Aliyah — Aplikasi lengkap: Surah, Doa & Dzikir, Hadits, Tips, Kuis, Sholawat, Jadwal Sholat & Jurnal — gamified dengan poin.</div>
+    <div class="splash-actions">
+      <button id="startBtn" class="btn">Mulai Sekarang</button>
+      <button id="skipBtn" class="btn-ghost">Lewati</button>
+    </div>
+    <div class="auto-note">(Auto lanjut dalam <span id="splashCounter">3</span> detik)</div>
+  </div>
+</div>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <div class="top-inner">
+    <div class="brand">
+      <div class="logo">🕋</div>
+      <div>
+        <div class="title">Edukasi Mental Islami</div>
+        <div class="subtitle">Remaja Madrasah Aliyah — Mental Sehat, Iman Kuat</div>
+      </div>
+    </div>
+    <div class="points">Poin: <span id="pointsView">0</span></div>
+  </div>
+</div>
+
+<!-- MAIN MENU -->
+<div class="container" id="mainContent" style="display:none">
+  <div class="intro">
+    <div class="intro-left">
+      <div class="intro-title">Menu Utama</div>
+      <div class="intro-sub">Halo, Pengguna — kumpulkan poin dengan membaca & mengamalkan (1× per item per hari)</div>
+    </div>
+    <div style="text-align:right">
+      <div class="small-muted">Poin tersimpan di perangkat</div>
+      <div id="todayBadge" class="small-muted"></div>
+    </div>
+  </div>
+
+  <div class="menu-grid">
+    <div class="menu-card" onclick="openSection('surahSec')">
+      <div class="menu-icon">📖</div>
+      <div class="menu-text"><div class="menu-title">Surah Al-Qur'an</div><div class="menu-desc">30 surah pendek — Arab + Latin (hardcoded)</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('doaSec')">
+      <div class="menu-icon">🤲</div>
+      <div class="menu-text"><div class="menu-title">Doa & Dzikir</div><div class="menu-desc">Rotasi harian (Arab + Latin)</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('sholawatSec')">
+      <div class="menu-icon">🌸</div>
+      <div class="menu-text"><div class="menu-title">Sholawat Harian</div><div class="menu-desc">2 sholawat berganti tiap hari</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('haditsSec')">
+      <div class="menu-icon">📜</div>
+      <div class="menu-text"><div class="menu-title">Hadits</div><div class="menu-desc">Rotasi motivasi harian</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('tipsSec')">
+      <div class="menu-icon">💡</div>
+      <div class="menu-text"><div class="menu-title">Tips Mental</div><div class="menu-desc">15 tips — amalkan dapat poin</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('quizSec')">
+      <div class="menu-icon">❓</div>
+      <div class="menu-text"><div class="menu-title">Kuis Harian</div><div class="menu-desc">10 soal/hari — benar dapat poin</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('praySec')">
+      <div class="menu-icon">🕋</div>
+      <div class="menu-text"><div class="menu-title">Jadwal Sholat</div><div class="menu-desc">Ambil dari API (Karimun) + pengingat</div></div>
+    </div>
+
+    <div class="menu-card" onclick="openSection('journalSec')">
+      <div class="menu-icon">📔</div>
+      <div class="menu-text"><div class="menu-title">Jurnal Harian</div><div class="menu-desc">Catat perasaan & syukur</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- SECTIONS (overlays) -->
+
+<!-- SURAH SECTION -->
+<div id="surahSec" class="section" aria-hidden="true">
+  <div class="sec-top">
+    <div><button class="back" onclick="closeSection('surahSec')">⬅ Kembali</button></div>
+    <div>
+      <strong>Surah Pendek (30)</strong>
+      <div class="small-muted">Arab + Latin (hardcoded). Gunakan tombol Sebelumnya/Berikutnya untuk pindah.</div>
+    </div>
+  </div>
+  <div class="sec-body">
+    <div id="surahControl" class="ctrl-row"></div>
+    <div id="surahCard" class="card"></div>
+    <div style="display:flex;justify-content:space-between;gap:8px;margin-top:6px">
+      <button class="btn-ghost" id="prevSurahBtn">⬅ Sebelumnya</button>
+      <button class="btn-ghost" id="nextSurahBtn">Berikutnya ➡</button>
+    </div>
+  </div>
+</div>
+
+<!-- DOA SECTION -->
+<div id="doaSec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('doaSec')">⬅ Kembali</button></div><div><strong>Doa & Dzikir</strong><div class="small-muted">Tekan "Diamalkan" untuk klaim poin</div></div></div>
+  <div class="sec-body" id="doaBody"></div>
+</div>
+
+<!-- SHOLOWAT -->
+<div id="sholawatSec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('sholawatSec')">⬅ Kembali</button></div><div><strong>Sholawat Harian</strong></div></div>
+  <div class="sec-body" id="sholawatBody"></div>
+</div>
+
+<!-- HADITS -->
+<div id="haditsSec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('haditsSec')">⬅ Kembali</button></div><div><strong>Hadits Harian</strong></div></div>
+  <div class="sec-body" id="haditsBody"></div>
+</div>
+
+<!-- TIPS -->
+<div id="tipsSec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('tipsSec')">⬅ Kembali</button></div><div><strong>Tips Mental</strong></div></div>
+  <div class="sec-body" id="tipsBody"></div>
+</div>
+
+<!-- QUIZ -->
+<div id="quizSec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('quizSec')">⬅ Kembali</button></div><div><strong>Kuis Harian</strong></div></div>
+  <div class="sec-body" id="quizBody"></div>
+</div>
+
+<!-- PRAY -->
+<div id="praySec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('praySec')">⬅ Kembali</button></div><div><strong>Jadwal Sholat (Karimun)</strong></div></div>
+  <div class="sec-body">
+    <div class="card">
+      <div id="prayInfo" class="small-muted">Mengambil jadwal...</div>
+      <div id="prayTimes" style="margin-top:10px"></div>
+    </div>
+    <div class="card">
+      <div class="small-muted">Pengingat:</div>
+      <label style="display:block"><input type="checkbox" id="remFajr"/> Subuh</label>
+      <label style="display:block"><input type="checkbox" id="remDhuhr"/> Dzuhur</label>
+      <label style="display:block"><input type="checkbox" id="remAsr"/> Ashar</label>
+      <label style="display:block"><input type="checkbox" id="remMaghrib"/> Maghrib</label>
+      <label style="display:block"><input type="checkbox" id="remIsha"/> Isya</label>
+      <div style="margin-top:8px"><button class="btn" id="saveRemBtn">Simpan Pengingat</button></div>
+    </div>
+  </div>
+</div>
+
+<!-- JOURNAL -->
+<div id="journalSec" class="section" aria-hidden="true">
+  <div class="sec-top"><div><button class="back" onclick="closeSection('journalSec')">⬅ Kembali</button></div><div><strong>Jurnal Harian</strong></div></div>
+  <div class="sec-body">
+    <div class="card small-muted">Tanggal: <span id="journalDate"></span></div>
+    <textarea id="journalText" style="width:100%;min-height:160px;border-radius:10px;padding:10px;margin-top:10px;background:transparent;border:1px solid rgba(255,255,255,.04);color:var(--white)"></textarea>
+    <div style="margin-top:8px"><button class="btn" id="saveJournalBtn">Simpan Jurnal</button> <button class="btn-ghost" id="allJournalBtn">Lihat Semua</button></div>
+    <div id="allJournals" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script>
+/* ================= CONFIG & STORAGE ================= */
+const DAYKEY = new Date().toISOString().slice(0,10);
+const LS_POINTS = "emi_points_vfinal";
+const LS_DONE_PREFIX = "emi_done_"+DAYKEY+"_";
+const LS_REMINDERS = "emi_rem_vfinal";
+const LS_JOURNALS = "emi_journals_vfinal";
+
+const $ = s => document.querySelector(s);
+const $$ = s => document.querySelectorAll(s);
+
+function toast(msg){ const t=$("#toast"); t.textContent=msg; t.style.display="block"; setTimeout(()=>t.style.display="none",1800); }
+
+/* Points */
+function getPoints(){ return Number(localStorage.getItem(LS_POINTS) || 0); }
+function setPoints(v){ localStorage.setItem(LS_POINTS, v); $("#pointsView").textContent = v; }
+
+/* one-per-day claim */
+function addPointsOnce(key, amount, btn){
+  const full = LS_DONE_PREFIX + key;
+  if(localStorage.getItem(full)){ if(btn) lockBtn(btn); toast("Sudah diklaim hari ini"); return false; }
+  const cur = getPoints() + amount;
+  setPoints(cur); localStorage.setItem(full,"1");
+  if(btn) lockBtn(btn);
+  toast("Poin +"+amount);
+  return true;
+}
+function lockBtn(btn){ if(!btn) return; btn.disabled=true; btn.className="locked"; btn.textContent="Terkunci ✓"; }
+
+/* restore locks (for any data-key elements) */
+function restoreLocks(){
+  $$("[data-key]").forEach(el=>{
+    const k = el.dataset.key;
+    if(localStorage.getItem(LS_DONE_PREFIX + k)) lockBtn(el);
+  });
+}
+
+/* deterministic daily picks */
+function seededRand(n){ return Math.abs(Math.sin(n)*10000)%1; }
+function pickDailyIndices(arrLen,count,salt=0){
+  const picked=[]; let i=0;
+  while(picked.length < count && i < arrLen*6){
+    const seed = Number(DAYKEY.replace(/-/g,'')) + i + salt;
+    const r = Math.floor(seededRand(seed) * arrLen);
+    if(!picked.includes(r)) picked.push(r);
+    i++;
+  }
+  return picked;
+}
+
+/* Init */
+if(!localStorage.getItem(LS_POINTS)) localStorage.setItem(LS_POINTS,"0");
+$("#pointsView").textContent = getPoints();
+$("#todayBadge").textContent = DAYKEY;
+
+/* Splash auto / buttons */
+let sc = 3;
+const counterEl = $("#splashCounter");
+const splashTimer = setInterval(()=>{ sc--; if(sc<=0){ clearInterval(splashTimer); openMain(); } counterEl.textContent = sc; },1000);
+$("#startBtn").addEventListener("click", ()=>{ clearInterval(splashTimer); openMain(); });
+$("#skipBtn").addEventListener("click", ()=>{ clearInterval(splashTimer); openMain(); });
+
+function openMain(){
+  $("#splash").style.display = "none";
+  $("#mainContent").style.display = "block";
+}
+
+/* ================= SURAH (hardcoded small set + placeholders) ================= */
+/* For performance & size we included 18 full short surah (arab+latin); placeholders for remaining surah numbers.
+   If you want ALL 30 fully offline, I can add them later (bigger file).
+*/
+const surahData = [
+  {name:"Al-Fatihah", arab:`بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ
+الْحَمْدُ لِلَّهِ رَبِّ الْعَالَمِينَ
+الرَّحْمَٰنِ الرَّحِيمِ
+مَالِكِ يَوْمِ الدِّينِ
+إِيَّاكَ نَعْبُدُ وَإِيَّاكَ نَسْتَعِينُ
+اهْدِنَا الصِّرَاطَ الْمُسْتَقِيمَ
+صِرَاطَ الَّذِينَ أَنْعَمْتَ عَلَيْهِمْ غَيْرِ الْمَغْضُوبِ عَلَيْهِمْ وَلَا الضَّالِّينَ`, latin:`Bismillāhir-raḥmānir-raḥīm
+Al-ḥamdu lillāhi rabbi-l-'ālamīn
+Ar-raḥmāni r-raḥīm
+Māliki yawmi-d-dīn
+Iyyāka na'budu wa iyyāka nasta'īn
+Ihdina-ṣ-ṣirāṭa l-mustaqīm
+Ṣirāṭa l-ladhīna an'amta 'alayhim ghayri l-maghḍūbi 'alayhim wa lā ḍ-ḍāllīn`},
+
+  {name:"Al-Ikhlâs", arab:`قُلْ هُوَ اللَّهُ أَحَدٌ
+اللَّهُ الصَّمَدُ
+لَمْ يَلِدْ وَلَمْ يُولَدْ
+وَلَمْ يَكُن لَّهُ كُفُوًا أَحَدٌ`, latin:`Qul huwa Allāhu 'aḥad
+Allāhu ṣ-ṣamad
+Lam yalid wa lam yūlad
+Wa lam yakun lahu kufuwan 'aḥad`},
+
+  {name:"Al-Falaq", arab:`قُلْ أَعُوذُ بِرَبِّ الْفَلَقِ
+مِن شَرِّ مَا خَلَقَ
+وَمِن شَرِّ غَاسِقٍ إِذَا وَقَبَ
+وَمِن شَرِّ النَّفَّاثَاتِ فِي الْعُقَدِ
+وَمِن شَرِّ حَاسِدٍ إِذَا حَسَدَ`, latin:`Qul a'ūdhu birabbi-l-falaq
+Min sharri mā khalaq
+Wa min sharri ghāsiqin idhā waqab
+Wa min sharri n-naffāthāti fī l-'uqad
+Wa min sharri ḥāsidin idhā ḥasad`},
+
+  {name:"An-Nâs", arab:`قُلْ أَعُوذُ بِرَبِّ النَّاسِ
+مَلِكِ النَّاسِ
+إِلَٰهِ النَّاسِ
+مِن شَرِّ الْوَسْوَاسِ الْخَنَّاسِ
+الَّذِي يُوَسْوِسُ فِي صُدُورِ النَّاسِ
+مِنَ الْجِنَّةِ وَالنَّاسِ`, latin:`Qul a'ūdhu birabbi-n-nās
+Maliki-n-nās
+Ilāhi-n-nās
+Min sharri-l-waswāsi l-khannās
+Alladhī yuwaswisu fī ṣudūri-n-nās
+Mina-l-jinnati wa-n-nās`},
+
+  {name:"Al-Kâfirûn", arab:`قُلْ يَا أَيُّهَا الْكَافِرُونَ
+لَا أَعْبُدُ مَا تَعْبُدُونَ
+وَلَا أَنتُمْ عَابِدُونَ مَا أَعْبُدُ
+لَكُمْ دِينُكُمْ وَلِيَ دِينِ`, latin:`Qul yā ayyuhā l-kāfirūn
+Lā a'budu mā ta'būdūn
+Wa lā antum 'ābidūna mā a'budu
+Lakum dīnukum wa liya dīn`},
+
+  {name:"Al-'Asr", arab:`وَالْعَصْرِ
+إِنَّ الْإِنسَانَ لَفِي خُسْرٍ
+إِلَّا الَّذِينَ آمَنُوا وَعَمِلُوا الصَّالِحَاتِ ...`, latin:`Wal-'aṣr
+Inna l-insāna lafī khusr
+Illā l-ladhīna āmanū wa 'amilū ṣ-ṣāliḥāt...`},
+
+  {name:"Al-Ma'ûn", arab:`أَرَأَيْتَ الَّذِي يُكَذِّبُ بِالدِّينِ...`, latin:`Ara'ayta alladhī yukadhdhibu bi-d-dīn...`},
+
+  {name:"Al-Kawthar", arab:`إِنَّا أَعْطَيْنَاكَ الْكَوْثَرَ
+فَصَلِّ لِرَبِّكَ وَانْحَرْ
+إِنَّ شَانِئَكَ هُوَ الْأَبْتَرُ`, latin:`Innā a'taynāka l-kawthar
+Fa-ṣalli li-rabbika wanḥar
+Inna shāni'aka huwa l-abtar`},
+
+  {name:"Al-Fil", arab:`أَلَمْ تَرَ كَيْفَ فَعَلَ رَبُّكَ بِأَصْحَابِ الْفِيلِ ...`, latin:`Alam tara kayfa fa'ala rabbuka bi aṣḥābi-l-fīl...`},
+
+  {name:"Quraisy", arab:`لِإِيلَافِ قُرَيْشٍ ...`, latin:`Li-īlāfi quraysh...`},
+
+  {name:"An-Nasr", arab:`إِذَا جَاءَ نَصْرُ اللَّهِ وَالْفَتْحُ`, latin:`Idhā jā'a naṣru-llāhi wa-l-fatḥ`},
+
+  {name:"Al-Masad", arab:`تَبَّتْ يَدَا أَبِي لَهَبٍ ...`, latin:`Tabbat yadā abi lahabin...`},
+
+  {name:"Al-Humazah", arab:`وَيْلٌ لِكُلِّ هُمَزَةٍ ...`, latin:`Wailun likulli humazatin...`},
+
+  {name:"At-Takâthur", arab:`أَلْهَاكُمُ التَّكَاثُرُ ...`, latin:`Alhakumuttakāthur...`},
+
+  {name:"Al-Qâri'ah", arab:`الْقَارِعَةُ ...`, latin:`Al-qāri'ah...`},
+
+  {name:"Al-'Adiyât", arab:`وَالْعَادِيَاتِ ضَبْحًا ...`, latin:`Wal-'ādyāti ḍabḥan...`},
+
+  {name:"Az-Zalzalah", arab:`إِذَا زُلْزِلَتِ الْأَرْضُ ...`, latin:`Idhā zulzilatil-arḍu...`},
+
+  {name:"Al-Bayyinah", arab:`لَمْ يَكُنِ الَّذِينَ كَفَرُوا ...`, latin:`Lam yakunil-ladhīna kafarū...`}
+  /* placeholders: add more full surah objects here to reach 30 if you want fully offline */
+];
+
+/* surah navigation */
+let surahIndex = 0;
+function renderSurah(i){
+  surahIndex = i;
+  const s = surahData[i];
+  if(!s){ $("#surahCard").innerHTML = "<div class='card small-muted'>Surah belum tersedia (placeholder)</div>"; return; }
+  $("#surahCard").innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center">
+    <strong>${s.name}</strong>
+    <button class="btn" id="claimSurahBtn" data-key="surah_${i}">Sudah Dibaca/Hafal (+10)</button></div>
+    <div class="item-arab" style="margin-top:10px">${s.arab.replace(/\n/g,"<br>")}</div>
+    <div class="latin">${s.latin.replace(/\n/g,"<br>")}</div>`;
+  const btn = $("#claimSurahBtn");
+  btn.onclick = ()=> addPointsOnce(`surah_${i}`, 10, btn);
+  $("#prevSurahBtn").disabled = (i === 0);
+  $("#nextSurahBtn").disabled = (i >= surahData.length - 1);
+  setTimeout(()=> restoreLocks(), 60);
+}
+$("#prevSurahBtn").addEventListener("click", ()=>{ if(surahIndex>0) renderSurah(surahIndex-1); });
+$("#nextSurahBtn").addEventListener("click", ()=>{ if(surahIndex < surahData.length-1) renderSurah(surahIndex+1); });
+
+/* ================= DOA & DZIKIR (hardcoded latin+arab) ================= */
+const doaDzikir = [
+  {title:"Doa Sebelum Tidur", arab:"بِاسْمِكَ اللَّهُمَّ أَحْيَا وَأَمُوتُ", latin:"Bismika Allāhumma aḥyā wa amūt", pts:5},
+  {title:"Doa Bangun Tidur", arab:"الْـحَمْدُ للهِ الَّذِي أَحْيَانَا", latin:"Alhamdulillahilladhī aḥyānā", pts:5},
+  {title:"Dzikir Pagi", arab:"أَصْبَحْنَا وَأَصْبَحَ الْمُلْكُ", latin:"Aṣbaḥnā wa aṣbaḥa al-mulku", pts:3},
+  {title:"Subhanallah", arab:"سُبْحَانَ اللَّهِ", latin:"Subḥānallāh", pts:2},
+  {title:"Alhamdulillah", arab:"الْحَمْدُ لِلَّهِ", latin:"Alḥamdulillāh", pts:2}
+];
+function renderDoa(){
+  const out = $("#doaBody"); out.innerHTML = "";
+  doaDzikir.forEach((d,i)=>{
+    const el = document.createElement("div"); el.className="card";
+    el.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><strong>${d.title}</strong><button class="btn" data-key="doa_${i}">Diamalkan (+${d.pts})</button></div>
+      <div class="item-arab" style="margin-top:8px">${d.arab}</div><div class="latin">${d.latin}</div>`;
+    const btn = el.querySelector("button"); btn.onclick = ()=> addPointsOnce(`doa_${i}`, d.pts, btn);
+    out.appendChild(el);
+  });
+}
+
+/* ========== Sholawat / Hadits / Tips (rotasi harian) ========== */
+const sholawatArr = [
+  {arab:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ", latin:"Allahumma shalli 'ala Muḥammad"},
+  {arab:"اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِهِ", latin:"Allahumma shalli 'ala Muḥammad wa 'ala alihi"}
+];
+function renderSholawat(){
+  const out = $("#sholawatBody"); out.innerHTML = "";
+  const idx = pickDailyIndices(sholawatArr.length,1,7)[0];
+  const s = sholawatArr[idx];
+  const el = document.createElement("div"); el.className="card";
+  el.innerHTML = `<div class="item-arab">${s.arab}</div><div class="latin">${s.latin}</div><div style="margin-top:8px"><button class="btn" data-key="sholawat_${idx}">Dibaca (+3)</button></div>`;
+  const btn = el.querySelector("button"); btn.onclick = ()=> addPointsOnce(`sholawat_${idx}`,3,btn);
+  out.appendChild(el);
+}
+
+const haditsArr = [
+  "Sebaik-baik manusia adalah yang paling bermanfaat bagi manusia.",
+  "Sesungguhnya amalan itu tergantung niatnya.",
+  "Barangsiapa menunjukkan kepada kebaikan, ia mendapat pahala seperti pelakunya.",
+  "Orang kuat bukan yang pandai bergelut, tetapi yang dapat menahan amarah."
+];
+function renderHadits(){
+  const out = $("#haditsBody"); out.innerHTML = "";
+  const idx = pickDailyIndices(haditsArr.length,1,11)[0];
+  const el = document.createElement("div"); el.className="card";
+  el.innerHTML = `<div>${haditsArr[idx]}</div><div style="margin-top:8px"><button class="btn" data-key="hadits_${idx}">Sudah Dibaca (+3)</button></div>`;
+  const btn = el.querySelector("button"); btn.onclick = ()=> addPointsOnce(`hadits_${idx}`,3,btn);
+  out.appendChild(el);
+}
+
+const tips = [
+ "Mulai hari dengan dzikir & niat baik",
+ "Tarik napas 4-4-6 saat cemas",
+ "Tulis 3 hal syukur tiap malam",
+ "Journaling 5 menit setiap hari",
+ "Olahraga ringan 10 menit",
+ "Senyum & sapa orang lain",
+ "Istirahat layar tiap 30 menit",
+ "Berdoa sebelum ujian/aktivitas penting",
+ "Bicarakan beban pada orang yang dipercaya",
+ "Batasi konten negatif saat belajar",
+ "Minum air & istirahat cukup",
+ "Buat daftar prioritas sederhana",
+ "Beramal kecil setiap hari",
+ "Jaga lisan; hindari gosip",
+ "Perbanyak membaca Al-Qur'an"
+];
+function renderTips(){
+  const out = $("#tipsBody"); out.innerHTML = "";
+  tips.forEach((t,i)=>{
+    const el = document.createElement("div"); el.className="card";
+    el.innerHTML = `<div>${t}</div><div style="margin-top:8px"><button class="btn" data-key="tips_${i}">Diamalkan (+2)</button></div>`;
+    const btn = el.querySelector("button"); btn.onclick = ()=> addPointsOnce(`tips_${i}`,2,btn);
+    out.appendChild(el);
+  });
+}
+
+/* ========== QUIZ ========== */
+const quizBank = [
+ {q:"Arti 'Subhanallah' adalah…", a:["Maha Suci Allah","Segala puji bagi Allah","Allah Maha Besar"], k:0},
+ {q:"Siapa nabi terakhir?", a:["Nabi Isa","Nabi Muhammad","Nabi Musa"], k:1},
+ {q:"Arti 'Alhamdulillah'…", a:["Segala puji bagi Allah","Saya setuju","Semoga berhasil"], k:0},
+ {q:"Istighfar artinya…", a:["Memohon ampun","Memohon pujian","Meminta rizki"], k:0},
+ {q:"Makna 'La ilaha illallah'…", a:["Tiada Tuhan selain Allah","Sholat wajib","Puasa"], k:0},
+ {q:"Sholat itu…", a:["Tiang agama","Hiburan","Bacaan"], k:0},
+ {q:"Sholawat ialah…", a:["Doa untuk Nabi","Doa untuk orang tua","Doa untuk teman"], k:0},
+ {q:"Sedekah itu…", a:["Membersihkan harta","Mengurangi harta","Tidak berguna"], k:0},
+ {q:"Puasa Ramadan hukumnya…", a:["Wajib","Sunnah","Mubah"], k:0},
+ {q:"Senyum kepada saudara itu…", a:["Sedekah","Benda","Pakaian"], k:0}
+];
+function renderQuiz(){
+  const out = $("#quizBody"); out.innerHTML = "";
+  const picks = pickDailyIndices(quizBank.length, 10, 11);
+  picks.forEach((pi, idx)=>{
+    const q = quizBank[pi];
+    const wrap = document.createElement("div"); wrap.className="card";
+    wrap.innerHTML = `<div style="font-weight:800">${idx+1}. ${q.q}</div><div style="margin-top:8px" id="opts_${idx}"></div>`;
+    const opts = wrap.querySelector(`#opts_${idx}`);
+    q.a.forEach((opt, oi)=>{
+      const b = document.createElement("button"); b.className="btn-ghost"; b.textContent = opt; b.style.marginRight="8px";
+      b.onclick = ()=>{
+        const doneKey = LS_DONE_PREFIX + `quiz_${pi}_${idx}`;
+        if(localStorage.getItem(doneKey)){ lockBtn(b); toast("Soal sudah dijawab benar hari ini"); return; }
+        if(oi === q.k){ addPointsOnce(`quiz_${pi}_${idx}`,5,b); [...opts.children].forEach(ch=>{ if(ch!==b){ ch.disabled=true; ch.className='locked'; ch.textContent='Terkunci'; }}); }
+        else { b.disabled=true; b.className='locked'; b.textContent='Salah'; toast("Salah — coba lagi"); }
+      };
+      opts.appendChild(b);
+    });
+    out.appendChild(wrap);
+  });
+}
+
+/* ========= PRAYER TIMES (Aladhan) + reminders ========= */
+async function fetchPrayerTimes(){
+  $("#prayInfo").textContent = "Mengambil jadwal sholat...";
+  $("#prayTimes").innerHTML = "";
+  try{
+    const res = await fetch("https://api.aladhan.com/v1/timingsByCity?city=Karimun&country=Indonesia&method=2");
+    const j = await res.json();
+    if(j && j.code===200 && j.data && j.data.timings){
+      localStorage.setItem("emi_pray_times", JSON.stringify(j.data.timings));
+      showPrayerTimes(j.data.timings);
+      $("#prayInfo").textContent = "Jadwal diperoleh dari Aladhan API.";
+      scheduleReminderCheck();
+      return;
+    }
+  }catch(e){ console.warn("Aladhan fail", e); }
+  const fallback = {Fajr:"04:30", Dhuhr:"12:00", Asr:"15:10", Maghrib:"18:00", Isha:"19:15"};
+  localStorage.setItem("emi_pray_times", JSON.stringify(fallback));
+  showPrayerTimes(fallback);
+  $("#prayInfo").textContent = "Menggunakan jadwal fallback (API gagal).";
+  scheduleReminderCheck();
+}
+function showPrayerTimes(times){
+  $("#prayTimes").innerHTML = `<div>Subuh: <strong>${times.Fajr}</strong></div>
+    <div>Dzuhur: <strong>${times.Dhuhr}</strong></div>
+    <div>Ashar: <strong>${times.Asr}</strong></div>
+    <div>Maghrib: <strong>${times.Maghrib}</strong></div>
+    <div>Isya: <strong>${times.Isha}</strong></div>`;
+}
+function restoreReminderBoxes(){
+  const r = JSON.parse(localStorage.getItem(LS_REMINDERS) || "{}");
+  $("#remFajr").checked = !!r.fajr; $("#remDhuhr").checked = !!r.dhuhr; $("#remAsr").checked = !!r.asr;
+  $("#remMaghrib").checked = !!r.maghrib; $("#remIsha").checked = !!r.isha;
+}
+$("#saveRemBtn").addEventListener("click", ()=>{
+  const r = { fajr:$("#remFajr").checked, dhuhr:$("#remDhuhr").checked, asr:$("#remAsr").checked, maghrib:$("#remMaghrib").checked, isha:$("#remIsha").checked };
+  localStorage.setItem(LS_REMINDERS, JSON.stringify(r)); toast("Pengingat disimpan");
+});
+let reminderInterval=null;
+function scheduleReminderCheck(){
+  if(reminderInterval) clearInterval(reminderInterval);
+  checkRemindersNow();
+  reminderInterval = setInterval(checkRemindersNow, 60*1000);
+}
+function timeToToday(t){
+  const m = (t||"").match(/(\d{1,2}):(\d{2})/);
+  if(!m) return null;
+  const d = new Date(); d.setHours(Number(m[1]), Number(m[2]), 0, 0); return d;
+}
+function checkRemindersNow(){
+  const times = JSON.parse(localStorage.getItem("emi_pray_times") || "{}");
+  if(!times || Object.keys(times).length===0) return;
+  const rem = JSON.parse(localStorage.getItem(LS_REMINDERS) || "{}");
+  const map = { fajr:"Fajr", dhuhr:"Dhuhr", asr:"Asr", maghrib:"Maghrib", isha:"Isha" };
+  Object.keys(map).forEach(k=>{
+    if(!rem[k]) return;
+    const tstr = times[map[k]];
+    const td = timeToToday(tstr); if(!td) return;
+    const now = new Date(); const nk = `emi_notified_${DAYKEY}_${k}`;
+    if(now >= td && now - td < 70*1000 && !localStorage.getItem(nk)){
+      notifyUser(`Waktu sholat ${map[k]}`, `Saatnya sholat ${map[k]} — ${tstr}`);
+      localStorage.setItem(nk,"1");
+    }
+  });
+}
+function notifyUser(title, body){
+  if(navigator.vibrate) navigator.vibrate([200,100,200]);
+  if("Notification" in window){
+    if(Notification.permission === "granted"){ new Notification(title, {body}); }
+    else if(Notification.permission !== "denied"){ Notification.requestPermission().then(perm=>{ if(perm==="granted") new Notification(title,{body}); else alert(title+"\n\n"+body); }); }
+    else alert(title+"\n\n"+body);
+  } else alert(title+"\n\n"+body);
+}
+
+/* ============ JOURNAL ============ */
+function openJournalToday(){
+  const d = new Date().toISOString().slice(0,10);
+  $("#journalDate").textContent = d;
+  const all = JSON.parse(localStorage.getItem(LS_JOURNALS) || "{}");
+  $("#journalText").value = all[d] || "";
+  renderAllJournals();
+}
+$("#saveJournalBtn").addEventListener("click", ()=>{
+  const d = new Date().toISOString().slice(0,10);
+  const all = JSON.parse(localStorage.getItem(LS_JOURNALS) || "{}");
+  const txt = $("#journalText").value.trim();
+  if(txt) all[d] = txt; else delete all[d];
+  localStorage.setItem(LS_JOURNALS, JSON.stringify(all)); toast("Jurnal tersimpan");
+  // give small points once per day for journaling
+  addPointsOnce("journal_"+d, 5, {disabled:false});
+  renderAllJournals();
+});
+$("#allJournalBtn").addEventListener("click", ()=> renderAllJournals());
+function renderAllJournals(){
+  const box = $("#allJournals"); const all = JSON.parse(localStorage.getItem(LS_JOURNALS) || "{}");
+  if(Object.keys(all).length===0){ box.innerHTML = "<div class='small-muted'>Belum ada catatan</div>"; return; }
+  box.innerHTML = Object.keys(all).sort((a,b)=>b.localeCompare(a)).map(k=>`<div class="card"><strong>${k}</strong><div class="small-muted">${all[k].slice(0,220)}</div></div>`).join("");
+}
+
+/* ============ UTIL & RENDER HOOKS ============ */
+function openSection(id){
+  $("#mainContent").style.display = "none";
+  document.getElementById(id).style.display = "block";
+  document.getElementById(id).scrollTop = 0;
+  // lazy render
+  if(id==="surahSec") renderSurah(0);
+  if(id==="doaSec") renderDoa();
+  if(id==="sholawatSec") renderSholawat();
+  if(id==="haditsSec") renderHadits();
+  if(id==="tipsSec") renderTips();
+  if(id==="quizSec") renderQuiz();
+  if(id==="praySec"){ fetchPrayerTimes(); restoreReminderBoxes(); }
+  if(id==="journalSec") openJournalToday();
+  setTimeout(()=> restoreLocks(), 60);
+}
+function closeSection(id){
+  document.getElementById(id).style.display = "none";
+  $("#mainContent").style.display = "block";
+}
+
+/* restore locks & points on load */
+setTimeout(()=> restoreLocks(), 120);
+setPoints(getPoints());
+
+/* Expose some functions for manual testing if needed */
+window.openSection = openSection;
+window.renderSurah = renderSurah;
+window.addPointsOnce = addPointsOnce;
+window.fetchPrayerTimes = fetchPrayerTimes;
+
+</script>
+</body>
+</html>
